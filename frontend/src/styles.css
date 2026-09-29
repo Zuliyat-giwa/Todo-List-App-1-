@@ -1,0 +1,509 @@
+/*
+  styles.css - all the styling for the app.
+
+  Everything is written with plain CSS, and the colours and sizes are
+  defined once as "custom properties" (also called CSS variables) below.
+  Changing --primary here changes every button, checkbox and highlight
+  in the app, which is a very handy trick to remember.
+*/
+
+:root {
+  --bg-top: #eef2ff;
+  --bg-bottom: #f8fafc;
+  --surface: #ffffff;
+  --surface-muted: #fcfdff;
+  --border: #e2e7f0;
+  --text: #1f2430;
+  --text-muted: #667085;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --danger: #dc2626;
+  --success: #15803d;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(31, 36, 48, 0.08);
+}
+
+* {
+  box-sizing: border-box; /* padding/border are counted inside the width */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 55%);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------- layout -------------------------------- */
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.app-main {
+  display: grid;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 22px 22px;
+}
+
+.panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.panel__title {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.panel__header .panel__title {
+  margin-bottom: 0;
+}
+
+/* ------------------------------- header -------------------------------- */
+
+.app-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 24px;
+  margin-bottom: 20px;
+}
+
+.app-header__title {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.app-header__subtitle {
+  margin: 6px 0 18px;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.stats__item {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-width: 92px;
+}
+
+.stats__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.stats__value {
+  margin: 2px 0 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* --------------------------------- forms -------------------------------- */
+
+.task-form,
+.edit-form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field__hint {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.field__input {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.field__input--textarea {
+  resize: vertical;
+  min-height: 62px;
+}
+
+/* -------------------------------- buttons ------------------------------- */
+
+.button {
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--surface-muted);
+  border-color: #cbd5e1;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button--primary {
+  justify-self: start;
+  color: #ffffff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.button--primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.button--danger {
+  color: var(--danger);
+}
+
+.button--danger:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.button--icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.form-error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
+/* ------------------------------ filters -------------------------------- */
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filters__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.filters__button:hover {
+  color: var(--text);
+}
+
+.filters__button.is-active {
+  color: #ffffff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.filters__count {
+  padding: 0 6px;
+  font-size: 0.72rem;
+  background: rgba(31, 36, 48, 0.08);
+  border-radius: 999px;
+}
+
+.filters__button.is-active .filters__count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ------------------------------- task list ------------------------------ */
+
+.task-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.task-card:hover {
+  border-color: #cbd5e1;
+}
+
+.task-card--editing {
+  display: block;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.task-card--busy {
+  opacity: 0.6;
+}
+
+.task-card--completed {
+  background: var(--surface-muted);
+}
+
+.task-card__main {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex: 1 1 240px;
+  min-width: 0; /* lets long words wrap instead of stretching the card */
+}
+
+.task-card__checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.task-card__text {
+  min-width: 0;
+}
+
+.task-card__title {
+  display: block;
+  font-weight: 600;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+.task-card__notes {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  white-space: pre-wrap; /* keeps the line breaks you typed */
+  word-break: break-word;
+}
+
+/* How a completed task is visually different from a pending one. */
+.task-card--completed .task-card__title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-card--completed .task-card__notes {
+  opacity: 0.75;
+}
+
+.task-card__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.edit-form__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------- messages & footer -------------------------- */
+
+.alert {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.alert__close {
+  padding: 0 6px;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.empty-state {
+  margin: 0;
+  padding: 28px 14px;
+  color: var(--text-muted);
+  text-align: center;
+  background: var(--surface-muted);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  font-size: 0.92rem;
+}
+
+.app-footer {
+  margin-top: 26px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+.app-footer code {
+  padding: 1px 5px;
+  background: rgba(79, 70, 229, 0.1);
+  border-radius: 5px;
+}
+
+/* ------------------------------ responsive ----------------------------- */
+
+/* These rules apply only on narrow screens such as a phone. */
+@media (max-width: 640px) {
+  .page {
+    padding: 18px 12px 36px;
+  }
+
+  .app-header {
+    padding: 20px 18px;
+  }
+
+  .app-header__title {
+    font-size: 1.4rem;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .stats__item {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 10px;
+  }
+
+  /* 16px keeps mobile Safari from zooming in when you tap an input. */
+  .field__input {
+    font-size: 16px;
+  }
+
+  /* On a phone the buttons move to their own line under the task text. */
+  .task-card__actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .button {
+    padding: 10px 12px;
+  }
+}
+
+/* ------------------------- dark mode (optional) ------------------------- */
+/* If your computer is set to dark mode, these colours are used instead. */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-top: #131629;
+    --bg-bottom: #0b0d16;
+    --surface: #1a1f31;
+    --surface-muted: #161a2a;
+    --border: #2b3350;
+    --text: #eef1f8;
+    --text-muted: #a3adc2;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .button:hover:not(:disabled),
+  .task-card:hover {
+    border-color: #3b466b;
+  }
+
+  .alert {
+    color: #fecdd3;
+    background: #2a1a1f;
+    border-color: #5c2b33;
+  }
+
+  .button--danger:hover:not(:disabled) {
+    background: #2a1a1f;
+    border-color: #5c2b33;
+  }
+}
+

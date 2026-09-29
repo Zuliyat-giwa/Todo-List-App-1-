@@ -1,0 +1,22 @@
+# Files you never want to commit to Git (or share) live here.
+
+# ---- Python / backend ----
+backend/.venv/
+__pycache__/
+*.py[cod]
+
+# The SQLite database file: it holds YOUR tasks, so keep it out of Git.
+# Delete it any time to start again with an empty list.
+*.db
+*.db-journal
+
+# ---- Node / frontend ----
+node_modules/
+frontend/dist/
+npm-debug.log*
+
+# ---- Editors & OS ----
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

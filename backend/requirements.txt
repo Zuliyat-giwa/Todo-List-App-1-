@@ -1,0 +1,9 @@
+# Python packages the backend needs.
+# Install them with:  python -m pip install -r requirements.txt
+#
+# fastapi   -> the web framework that turns Python functions into API endpoints
+# uvicorn   -> the small web server that actually runs our FastAPI app
+# watchfiles-> lets uvicorn restart itself when you save a file (the --reload flag)
+fastapi>=0.115.0
+uvicorn>=0.32.0
+watchfiles>=0.24.0
