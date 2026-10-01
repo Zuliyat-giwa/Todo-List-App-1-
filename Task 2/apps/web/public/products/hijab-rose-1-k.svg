@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6ecdf"/><stop offset="1" stop-color="#ddd4c9"/></linearGradient>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b17f7d"/><stop offset=".45" stop-color="#ca9694"/><stop offset="1" stop-color="#a57675"/></linearGradient>
+  <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2d98b"/><stop offset=".5" stop-color="#c9a24b"/><stop offset="1" stop-color="#8f6b1e"/></linearGradient>
+  <radialGradient id="gl" cx=".3" cy=".25" r=".9"><stop offset="0" stop-color="#ffffff" stop-opacity=".28"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="-1000" y="-1000" width="3000" height="3000" fill="url(#bg)"/>
+<circle cx="400" cy="500" r="300" fill="#d18b2b" opacity="0.16"/>
+<ellipse cx="400" cy="905" rx="250" ry="16" fill="#000" opacity=".10"/>
+<g transform="translate(120 250) scale(.7)">
+    <path d="M200 700 C150 520 190 420 250 372 C240 270 290 160 400 160 C510 160 560 270 550 372 C610 420 650 520 600 700 Z" fill="url(#g)"/>
+    <ellipse cx="400" cy="330" rx="76" ry="96" fill="#e6d6c3"/>
+    <path d="M330 300 Q400 225 470 300 Q470 250 400 235 Q330 250 330 300Z" fill="#b58280"/>
+    <path d="M250 372 Q330 470 400 700" stroke="#9a6e6c" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M550 372 Q470 470 400 700" stroke="#9a6e6c" stroke-width="3" fill="none" opacity=".6"/></g><path d="M90 840 h620" stroke="#00000010" stroke-width="2"/>
+</svg>

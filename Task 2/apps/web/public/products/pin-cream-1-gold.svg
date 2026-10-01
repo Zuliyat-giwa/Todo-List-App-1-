@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4eadb"/><stop offset="1" stop-color="#dcd3c5"/></linearGradient>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d3c9b7"/><stop offset=".45" stop-color="#ece2cf"/><stop offset="1" stop-color="#c5bbab"/></linearGradient>
+  <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2d98b"/><stop offset=".5" stop-color="#c9a24b"/><stop offset="1" stop-color="#8f6b1e"/></linearGradient>
+  <radialGradient id="gl" cx=".3" cy=".25" r=".9"><stop offset="0" stop-color="#ffffff" stop-opacity=".28"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="-1000" y="-1000" width="3000" height="3000" fill="url(#bg)"/>
+<circle cx="400" cy="500" r="300" fill="#b88a2a" opacity="0.16"/>
+<ellipse cx="400" cy="930" rx="250" ry="16" fill="#000" opacity=".10"/>
+
+    <path d="M300 420 A150 150 0 1 0 520 560 A115 115 0 1 1 300 420Z" fill="url(#gd)"/>
+    <path d="M520 360 l22 52 56 4 -43 36 14 55 -49 -30 -49 30 14 -55 -43 -36 56 -4z" fill="url(#gd)"/>
+    <circle cx="520" cy="430" r="14" fill="#eadfcb"/>
+    <rect x="200" y="730" width="400" height="12" rx="6" fill="#a1823c"/>
+    <circle cx="600" cy="736" r="14" fill="url(#gd)"/>
+</svg>

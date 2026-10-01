@@ -1,0 +1,44 @@
+# Render Blueprint for the NestJS API. Create it with: New > Blueprint > pick this repo.
+# Secrets marked `sync: false` are entered in the Render dashboard (never committed).
+services:
+  - type: web
+    name: modeza-api
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm ci --include=dev && npm run build -w apps/api
+    startCommand: npm run migrate:deploy -w apps/api && npm run start -w apps/api
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: API_URL
+        sync: false
+      - key: WEB_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: MAILGUN_API_KEY
+        sync: false
+      - key: MAILGUN_DOMAIN
+        sync: false
+      - key: MAILGUN_API_BASE
+        value: https://api.mailgun.net
+      - key: MAIL_FROM
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
