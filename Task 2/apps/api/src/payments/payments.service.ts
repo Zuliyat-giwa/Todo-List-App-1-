@@ -20,9 +20,12 @@ export class PaymentsService {
   private get secret() {
     return process.env.PAYSTACK_SECRET_KEY || '';
   }
-  /** Local development without a Paystack key uses a fake gateway page. Never enabled in production. */
+  /**
+   * Simulated gateway (no real money). On only when no Paystack key is set AND either the app is not in
+   * production or ALLOW_TEST_PAYMENTS=true is set explicitly. A real PAYSTACK_SECRET_KEY always wins.
+   */
   get devGateway() {
-    return !this.secret && !config.isProd;
+    return !this.secret && (!config.isProd || process.env.ALLOW_TEST_PAYMENTS === 'true');
   }
 
   private async paystack(path: string, init?: RequestInit) {

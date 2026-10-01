@@ -25,9 +25,9 @@ function MockPay() {
   return (
     <div className="container-x grid min-h-[60vh] place-items-center py-16">
       <div className="card w-full max-w-md space-y-5 p-8 text-center">
-        <p className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800">Simulated payment (development only)</p>
+        <p className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800">TEST MODE: no real money is charged</p>
         <h1 className="text-3xl">Test payment gateway</h1>
-        <p className="text-sm text-ink-soft">Order {order}. Configure PAYSTACK_SECRET_KEY to use the real Paystack checkout.</p>
+        <p className="text-sm text-ink-soft">Order {order}. The store owner can switch on real Paystack payments at any time.</p>
         <button className="btn-dark w-full" disabled={!ready} onClick={() => done('success')} data-testid="mock-success">Simulate successful payment</button>
         <button className="btn-outline w-full" disabled={!ready} onClick={() => done('failed')} data-testid="mock-fail">Simulate failed payment</button>
         {err && <p role="alert" className="text-sm text-red-700">{err}</p>}
