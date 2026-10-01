@@ -8,3 +8,7 @@ uploads
 test-results
 playwright-report
 *.tsbuildinfo
+
+.vercel
+.admin-credentials.txt
+.vercel

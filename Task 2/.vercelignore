@@ -1,0 +1,7 @@
+node_modules
+.next
+apps/api/.pgdata
+apps/api/dist
+apps/api/uploads
+test-results
+.env

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install --include=dev",
+  "buildCommand": "npm run build && node -e \"require('fs').mkdirSync('public',{recursive:true});require('fs').writeFileSync('public/index.txt','Modeza API')\"",
+  "outputDirectory": "public",
+  "functions": { "api/index.js": { "includeFiles": "{dist,prisma}/**", "maxDuration": 30 } },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }]
+}

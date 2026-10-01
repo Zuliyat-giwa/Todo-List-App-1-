@@ -1,9 +1,6 @@
 node_modules
-dist
-.env
 .pgdata
 uploads
+.env
 .env.localdb
-
-.vercel
-.env*
+test
