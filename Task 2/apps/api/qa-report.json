@@ -1,0 +1,15 @@
+{
+  "ranAt": "2026-10-02T04:45:04.639Z",
+  "base": "http://127.0.0.1:4177",
+  "total": 1,
+  "passed": 0,
+  "failed": 1,
+  "results": [
+    {
+      "name": "API boots and /health responds",
+      "ok": false,
+      "detail": ""
+    }
+  ],
+  "serverLogTail": ""
+}

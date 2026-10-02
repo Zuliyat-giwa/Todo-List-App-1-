@@ -66,8 +66,8 @@ export class AuthService {
       data: { name: clean(name)!, email, passwordHash: await bcrypt.hash(password, 12) },
     });
     const raw = await this.issueToken(user.id, 'EMAIL_VERIFY', DAY);
-    void this.mail.welcome(user.email, user.name);
-    void this.mail.verifyEmail(user.email, user.name, `${config.webUrl}/verify-email?token=${raw}`);
+    await this.mail.welcome(user.email, user.name);
+    await this.mail.verifyEmail(user.email, user.name, `${config.webUrl}/verify-email?token=${raw}`);
     return user;
   }
 
@@ -92,7 +92,7 @@ export class AuthService {
     const user = await this.prisma.user.findUniqueOrThrow({ where: { id: userId } });
     if (user.emailVerified) return;
     const raw = await this.issueToken(user.id, 'EMAIL_VERIFY', DAY);
-    void this.mail.verifyEmail(user.email, user.name, `${config.webUrl}/verify-email?token=${raw}`);
+    await this.mail.verifyEmail(user.email, user.name, `${config.webUrl}/verify-email?token=${raw}`);
   }
 
   /** Always resolves quietly so the endpoint cannot be used to discover registered emails. */
@@ -100,7 +100,7 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({ where: { email: email.toLowerCase().trim() } });
     if (!user) return;
     const raw = await this.issueToken(user.id, 'PASSWORD_RESET', 60 * 60_000);
-    void this.mail.passwordReset(user.email, user.name, `${config.webUrl}/reset-password?token=${raw}`);
+    await this.mail.passwordReset(user.email, user.name, `${config.webUrl}/reset-password?token=${raw}`);
   }
 
   async resetPassword(raw: string, password: string) {
@@ -140,7 +140,7 @@ export class AuthService {
         user = await this.prisma.user.create({
           data: { email, googleId: p.sub, name: p.name || email.split('@')[0], avatarUrl: p.picture, emailVerified: true },
         });
-        void this.mail.welcome(user.email, user.name);
+        await this.mail.welcome(user.email, user.name);
       }
     }
     return user;

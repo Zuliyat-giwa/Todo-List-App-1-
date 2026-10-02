@@ -1,0 +1,43 @@
+2026-10-02 05:42:03.837 WAT [25736] LOG:  starting PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit
+
+2026-10-02 05:42:03.842 WAT [25736] LOG:  listening on IPv6 address "::1", port 54329
+
+2026-10-02 05:42:03.842 WAT [25736] LOG:  listening on IPv4 address "127.0.0.1", port 54329
+
+2026-10-02 05:42:03.921 WAT [25932] LOG:  database system was interrupted; last known up at 2026-10-02 05:41:16 WAT
+
+2026-10-02 05:42:04.265 WAT [25932] LOG:  database system was not properly shut down; automatic recovery in progress
+
+2026-10-02 05:42:04.276 WAT [25932] LOG:  redo starts at 0/5A9C368
+
+2026-10-02 05:42:04.276 WAT [25932] LOG:  invalid record length at 0/5A9C3A0: expected at least 24, got 0
+2026-10-02 05:42:04.276 WAT [25932] LOG:  redo done at 0/5A9C368 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+
+2026-10-02 05:42:04.287 WAT [13236] LOG:  checkpoint starting: end-of-recovery immediate wait
+
+2026-10-02 05:42:04.312 WAT [13236] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.006 s, total=0.029 s; sync files=2, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/5A9C3A0, redo lsn=0/5A9C3A0
+
+2026-10-02 05:42:04.330 WAT [25736] LOG:  database system is ready to accept connections
+
+2026-10-02 05:42:04.421 WAT [8996] ERROR:  database "modeza_dev" already exists
+2026-10-02 05:42:04.421 WAT [8996] STATEMENT:  CREATE DATABASE "modeza_dev"
+
+2026-10-02 05:42:04.464 WAT [17356] ERROR:  database "modeza_test_utf8" already exists
+2026-10-02 05:42:04.464 WAT [17356] STATEMENT:  CREATE DATABASE "modeza_test_utf8"
+
+Local Postgres ready on port 54329
+DATABASE_URL=postgresql://postgres:postgres@localhost:54329/modeza_dev
+2026-10-02 05:43:05.451 WAT [25556] ERROR:  duplicate key value violates unique constraint "Order_idempotencyKey_key"
+2026-10-02 05:43:05.451 WAT [25556] DETAIL:  Key ("idempotencyKey")=(idem-muqh964y) already exists.
+2026-10-02 05:43:05.451 WAT [25556] STATEMENT:  INSERT INTO "public"."Order" ("id","orderNumber","email","customerName","phone","status","currency","subtotalMinor","discountMinor","shippingMinor","taxMinor","totalMinor","discountCode","shippingMethod","shipCountry","shipState","shipCity","shipStreet","shipPostalCode","deliveryNotes","idempotencyKey","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,CAST($6::text AS "public"."OrderStatus"),$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23) RETURNING "public"."Order"."id"
+
+2026-10-02 05:43:08.588 WAT [21816] ERROR:  duplicate key value violates unique constraint "DiscountCode_code_key"
+2026-10-02 05:43:08.588 WAT [21816] DETAIL:  Key (code)=(NEWMUQH964Y) already exists.
+2026-10-02 05:43:08.588 WAT [21816] STATEMENT:  INSERT INTO "public"."DiscountCode" ("id","code","type","value","minPurchaseMinor","usageLimit","usedCount","expiresAt","isActive","createdAt") VALUES ($1,$2,CAST($3::text AS "public"."DiscountType"),$4,$5,$6,$7,$8,$9,$10) RETURNING "public"."DiscountCode"."id", "public"."DiscountCode"."code", "public"."DiscountCode"."type"::text, "public"."DiscountCode"."value", "public"."DiscountCode"."minPurchaseMinor", "public"."DiscountCode"."usageLimit", "public"."DiscountCode"."usedCount", "public"."DiscountCode"."expiresAt", "public"."DiscountCode"."isActive", "public"."DiscountCode"."createdAt"
+
+2026-10-02 05:47:04.319 WAT [13236] LOG:  checkpoint starting: time
+
+2026-10-02 05:47:12.483 WAT [13236] LOG:  checkpoint complete: wrote 74 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=8.116 s, sync=0.029 s, total=8.164 s; sync files=74, longest=0.001 s, average=0.001 s; distance=157 kB, estimate=157 kB; lsn=0/5AC3C08, redo lsn=0/5AC3B78
+
+2026-10-02 06:09:35.248 WAT [25736] LOG:  could not reserve shared memory region (addr=000001BD965E0000) for child 0000000000000F80: error code 487
+

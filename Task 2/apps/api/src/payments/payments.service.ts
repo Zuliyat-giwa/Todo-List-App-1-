@@ -121,8 +121,8 @@ export class PaymentsService {
     if (processed) {
       const full = await this.prisma.order.findUniqueOrThrow({ where: { id: processed }, include: { items: true, shipment: true, payments: { orderBy: { createdAt: 'desc' } } } });
       if (full.status === 'PAID') {
-        void this.mail.order('confirmation', emailData(full));
-        void this.mail.order('payment', emailData(full));
+        await this.mail.order('confirmation', emailData(full));
+        await this.mail.order('payment', emailData(full));
       }
     }
     return !!processed;
@@ -173,7 +173,7 @@ export class PaymentsService {
       await tx.order.update({ where: { id: order.id }, data: { status: 'REFUNDED' } });
     });
     const full = await this.prisma.order.findUniqueOrThrow({ where: { id: orderId }, include: { items: true, shipment: true, payments: { orderBy: { createdAt: 'desc' } } } });
-    void this.mail.order('refunded', emailData(full));
+    await this.mail.order('refunded', emailData(full));
     return full;
   }
 }

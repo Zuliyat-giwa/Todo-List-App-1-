@@ -124,7 +124,7 @@ export class CatalogController {
     const exists = await this.prisma.newsletterSubscriber.findUnique({ where: { email } });
     if (!exists) {
       await this.prisma.newsletterSubscriber.create({ data: { email } });
-      void this.mail.newsletter(email);
+      await this.mail.newsletter(email);
     }
     return { ok: true };
   }

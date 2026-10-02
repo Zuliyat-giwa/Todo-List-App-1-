@@ -167,8 +167,8 @@ async function main() {
     const slug = slugify(name);
     const parent = await prisma.category.upsert({
       where: { slug },
-      create: { name, nameAr: t.ar, slug, imageUrl: `/products/${t.img}.svg`, sortOrder: order++ },
-      update: { name, nameAr: t.ar, imageUrl: `/products/${t.img}.svg`, sortOrder: order - 1 },
+      create: { name, nameAr: t.ar, slug, imageUrl: null, sortOrder: order++ },
+      update: { name, nameAr: t.ar, imageUrl: null, sortOrder: order - 1 },
     });
     catIds.set(name, parent.id);
     let k = 0;
@@ -220,7 +220,7 @@ async function main() {
       { url: art(s, first, 2), alt: `${s.name} - ${COLORS[first].name} detail` },
     ];
     for (const c of s.colors.slice(1)) imgs.push({ url: art(s, c, 1), alt: `${s.name} - ${COLORS[c].name}` });
-    await prisma.productImage.createMany({ data: imgs.map((i, n) => ({ ...i, productId: p.id, sortOrder: n })) });
+    // Product photos are applied afterwards by `npm run photos` (real photos only, no illustrations).
     await prisma.productAttribute.createMany({ data: (s.attrs ?? []).map(([key, value]) => ({ productId: p.id, key, value })) });
     products.push({ id: p.id, seed: hash(slug) });
   }
@@ -230,9 +230,9 @@ async function main() {
   const hero = (c: string, t: string) => `/products/${t}-${c}-1.svg`;
   await prisma.banner.createMany({
     data: [
-      { title: 'Timeless Elegance', subtitle: 'Minimal designs. Maximum impact. Redefine your wardrobe with pieces that speak sophistication.', ctaLabel: 'Explore Collection', ctaHref: '/shop?category=women', imageUrl: hero('burgundy', 'jilbab'), placement: 'hero', sortOrder: 0 },
-      { title: 'Summer Sale: Up to 50% Off', subtitle: 'Refresh your style this season with our exclusive collection. Limited time offer.', ctaLabel: 'Shop the Sale', ctaHref: '/sale', imageUrl: hero('sand', 'dress'), placement: 'promo', sortOrder: 1 },
-      { title: 'The Ramadan and Eid Edit', subtitle: 'Gifts, journals, fragrances and festive wear.', ctaLabel: 'Discover', ctaHref: '/shop?collection=Eid', imageUrl: '/products/giftbox-terracotta-1.svg', placement: 'promo', sortOrder: 2 },
+      { title: 'Timeless Elegance', subtitle: 'Minimal designs. Maximum impact. Redefine your wardrobe with pieces that speak sophistication.', ctaLabel: 'Explore Collection', ctaHref: '/shop?category=women', imageUrl: '/products/photos/placeholder.jpg', placement: 'hero', sortOrder: 0 },
+      { title: 'Summer Sale: Up to 50% Off', subtitle: 'Refresh your style this season with our exclusive collection. Limited time offer.', ctaLabel: 'Shop the Sale', ctaHref: '/sale', imageUrl: '/products/photos/placeholder.jpg', placement: 'promo', sortOrder: 1 },
+      { title: 'The Ramadan and Eid Edit', subtitle: 'Gifts, journals, fragrances and festive wear.', ctaLabel: 'Discover', ctaHref: '/shop?collection=Eid', imageUrl: '/products/photos/placeholder.jpg', placement: 'promo', sortOrder: 2 },
     ],
   });
 

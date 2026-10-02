@@ -201,7 +201,7 @@ export class OrdersService implements OnModuleInit, OnModuleDestroy {
     });
     if (result && opts.notify !== false && result.status !== 'PENDING_PAYMENT') {
       const full = await this.prisma.order.findUniqueOrThrow({ where: { id: orderId }, include: orderInclude });
-      void this.mail.order('cancelled', emailData(full));
+      await this.mail.order('cancelled', emailData(full));
     }
     return result;
   }
@@ -239,7 +239,7 @@ export class OrdersService implements OnModuleInit, OnModuleDestroy {
     });
     const full = await this.prisma.order.findUniqueOrThrow({ where: { id: orderId }, include: orderInclude });
     const kind = ({ PROCESSING: 'processing', SHIPPED: 'shipped', DELIVERED: 'delivered' } as const)[status as 'PROCESSING'];
-    if (kind) void this.mail.order(kind, emailData(full));
+    if (kind) await this.mail.order(kind, emailData(full));
     return full;
   }
 }
