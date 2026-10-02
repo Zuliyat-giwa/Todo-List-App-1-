@@ -66,6 +66,7 @@ export default function Footer({ categories }: { categories: { name: string; slu
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/60">
         &copy; {new Date().getFullYear()} Modeza. {t('footer.rights')}
+        <span className="mt-1 block">Photos by independent photographers on <a href="https://unsplash.com/?utm_source=modeza&utm_medium=referral" className="underline" target="_blank" rel="noreferrer">Unsplash</a> and <a href="https://pixabay.com" className="underline" target="_blank" rel="noreferrer">Pixabay</a></span>
       </div>
     </footer>
   );
