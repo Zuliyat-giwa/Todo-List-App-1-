@@ -120,7 +120,7 @@ export default function ProductView({ p }: { p: Product }) {
   const sizes = useMemo(() => [...new Set(p.variants.map((v) => v.size).filter(Boolean))] as string[], [p]);
   const colors = useMemo(() => [...new Set(p.variants.map((v) => v.color).filter(Boolean))] as string[], [p]);
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0] : null);
-  const [color, setColor] = useState<string | null>(colors.length === 1 ? colors[0] : null);
+  const [color, setColor] = useState<string | null>(colors.find((c) => p.variants.some((v) => v.color === c && v.stock > 0)) ?? colors[0] ?? null); // first colour that is in stock is pre-selected
   const [qty, setQty] = useState(1);
   const [index, setIndex] = useState(0);
   const [guide, setGuide] = useState(false);
@@ -158,7 +158,12 @@ export default function ProductView({ p }: { p: Product }) {
 
   const add = (buyNow = false) => {
     setTried(true);
-    if (!variant) { toast(t('pdp.selectOptions'), 'err'); return; }
+    if (!variant) {
+      const missing = needColor && !color ? 'colour' : 'size';
+      toast(`Please choose a ${missing} first`, 'err');
+      document.getElementById(missing === 'size' ? 'opt-size' : 'opt-color')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     if (stock < 1) { toast(t('common.outOfStock'), 'err'); return; }
     const inCart = cart.items.find((i) => i.variantId === variant.id)?.quantity ?? 0;
     if (inCart + qty > stock) { toast(`Only ${stock} available`, 'err'); return; }
@@ -190,7 +195,7 @@ export default function ProductView({ p }: { p: Product }) {
           <Price p={{ ...p, currentPriceMinor: variant?.priceMinor ?? p.currentPriceMinor }} className="mt-4 text-2xl" />
 
           {colors.length > 0 && (
-            <fieldset className="mt-7">
+            <fieldset id="opt-color" className={`mt-7 rounded-xl ${tried && needColor && !color ? 'ring-2 ring-red-400 ring-offset-4' : ''}`}>
               <legend className="label">{t('pdp.color')}{color ? `: ${color}` : ''}</legend>
               <div className="flex flex-wrap gap-2">{colors.map((c) => (
                 <button key={c} aria-pressed={color === c} onClick={() => pickColor(c)} className={`chip ${color === c ? 'chip-on' : ''} ${!colorAvailable(c) ? 'opacity-50 line-through' : ''}`}>{c}</button>
@@ -198,7 +203,7 @@ export default function ProductView({ p }: { p: Product }) {
             </fieldset>
           )}
           {sizes.length > 0 && (
-            <fieldset className="mt-5">
+            <fieldset id="opt-size" className={`mt-5 rounded-xl ${tried && needSize && !size ? 'ring-2 ring-red-400 ring-offset-4' : ''}`}>
               <legend className="label flex w-full items-center justify-between gap-3"><span>{t('pdp.size')}{size ? `: ${size}` : ''}</span>
                 {isClothing && <button type="button" onClick={() => setGuide(true)} className="inline-flex items-center gap-1 normal-case text-brand underline"><Ruler size={13} /> {t('pdp.sizeGuide')}</button>}</legend>
               <div className="flex flex-wrap gap-2">{sizes.map((s) => (
@@ -206,7 +211,7 @@ export default function ProductView({ p }: { p: Product }) {
               ))}</div>
             </fieldset>
           )}
-          {tried && !ready && <p role="alert" className="mt-3 text-sm text-red-700">{t('pdp.selectOptions')}</p>}
+          {tried && !ready && <p role="alert" className="mt-3 text-sm font-medium text-red-700">Please choose a {needColor && !color ? 'colour' : 'size'} to continue.</p>}
 
           <p className="mt-5 text-sm" data-testid="stock-status">
             {!ready ? <span className="text-ink-mute">{p.inStock ? t('common.inStock') : t('common.outOfStock')}</span>

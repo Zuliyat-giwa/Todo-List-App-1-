@@ -64,8 +64,8 @@ test.describe('storefront', () => {
   test('requires choosing options before adding clothing to the cart, then full guest checkout with payment', async ({ page }) => {
     await page.goto('/product/classic-open-abaya');
     await page.getByRole('button', { name: 'Add to Cart' }).click();
-    await expect(page.getByRole('alert').first()).toContainText('Select options');
-    await page.getByRole('button', { name: 'Black', exact: true }).click();
+    await expect(page.getByRole('alert').first()).toContainText('Please choose a size');
+    await expect(page.getByRole('button', { name: 'Black', exact: true })).toHaveAttribute('aria-pressed', 'true'); // first in-stock colour is pre-selected
     await page.getByRole('button', { name: '54', exact: true }).click();
     await expect(page.getByTestId('stock-status')).toContainText(/In stock|left/);
     await page.getByRole('button', { name: 'Add to Cart' }).click();
